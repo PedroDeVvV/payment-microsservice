@@ -1,8 +1,10 @@
 package br.com.alurafood.pagamentos.controller;
 
 import br.com.alurafood.pagamentos.dto.PagamentoDto;
+import br.com.alurafood.pagamentos.model.Pagamento;
 import br.com.alurafood.pagamentos.repository.PagamentoRepository;
 import br.com.alurafood.pagamentos.service.PagamentoService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +53,10 @@ public class PagamentoController {
     public ResponseEntity<PagamentoDto> remover(@PathVariable @NotNull Long id) {
         service.excluirPagamento(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/confirmar")
+    public void confirmarPagament(@PathVariable @NotNull Long id) {
+        service.confirmarPagamento(id);
     }
 }
